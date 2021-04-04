@@ -1,0 +1,22 @@
+article.Card {
+  background: var(--c-white);
+  border-radius: var(--box-border-radius);
+  box-shadow: 0 4px 8px var(--c-black-alpha-50);
+  overflow: hidden;
+}
+
+article.Card.padding-lg {
+  padding: var(--page-padding);
+}
+
+article.Card.padding-md {
+  padding: var(--box-padding);
+}
+
+article.Card.padding-none {
+  padding: 0;
+}
+
+article.Card.padding-sm {
+  padding: var(--box-short-padding);
+}

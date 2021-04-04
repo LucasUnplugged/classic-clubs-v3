@@ -1,0 +1,60 @@
+:root {
+  --app-header-height: 88px;
+}
+
+/* AUTHOR'S NOTE:
+ * I'm making heavy use of the direct child (>) selector, as it allows me to
+ * minimize use of classes, without accidental styling of nested elements.
+ */
+
+main.App > section {
+  padding-top: var(--app-header-height);
+}
+
+main.App > header,
+main.App > header > h1 {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+}
+
+main.App > header {
+  background: var(--c-white);
+  box-shadow: 0 4px 12px var(--c-black-alpha-50);
+  height: var(--app-header-height);
+  padding: var(--box-padding);
+  position: fixed;
+  width: 100vw;
+  z-index: 10;
+}
+
+main.App > header > h1 {
+  background: var(--c-primary-500);
+  border-radius: 16px 0 16px 0;
+  color: var(--c-white);
+  font-size: var(--font-size-xxl);
+  font-weight: 300;
+  height: 100%;
+  margin: 0;
+  padding: 0 16px;
+  position: relative;
+}
+
+main.App > header nav {
+  margin-left: 40px;
+}
+
+main.App > header nav ul,
+main.App > header nav li {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+main.App > header nav li {
+  margin-right: 8px;
+}

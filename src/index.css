@@ -1,0 +1,142 @@
+:root {
+  /* COLOR PALETTE */
+  --c-primary-50: #ffe6e3;
+  --c-primary-100: #febdb7;
+  --c-primary-200: #f69489;
+  --c-primary-300: #f1695a;
+  --c-primary-400: #ec402d;
+  --c-primary-500: #d22613;
+  --c-primary-600: #a51d0e;
+  --c-primary-700: #761309;
+  --c-primary-800: #490902;
+  --c-primary-900: #1f0000;
+
+  --c-secondary-300: #2f6b84;
+  --c-secondary-500: #1e485f;
+  --c-secondary-700: #0a263b;
+
+  --c-neutral-50: #efefef;
+  --c-neutral-100: #dfdfdf;
+  --c-neutral-200: #bebebe;
+  --c-neutral-300: #a5a5a5;
+  --c-neutral-400: #8c8c8c;
+  --c-neutral-500: #737373;
+  --c-neutral-600: #595959;
+  --c-neutral-700: #3f3f3f;
+  --c-neutral-800: #252525;
+  --c-neutral-900: #080808;
+
+  --c-white: #fff;
+  --c-black: #000;
+
+  --c-white-alpha-50: rgba(255, 255, 255, 0.05);
+  --c-white-alpha-100: rgba(255, 255, 255, 0.1);
+  --c-white-alpha-200: rgba(255, 255, 255, 0.2);
+  --c-white-alpha-300: rgba(255, 255, 255, 0.3);
+  --c-white-alpha-400: rgba(255, 255, 255, 0.4);
+  --c-white-alpha-500: rgba(255, 255, 255, 0.5);
+  --c-white-alpha-600: rgba(255, 255, 255, 0.6);
+  --c-white-alpha-700: rgba(255, 255, 255, 0.7);
+  --c-white-alpha-800: rgba(255, 255, 255, 0.8);
+  --c-white-alpha-900: rgba(255, 255, 255, 0.9);
+
+  --c-black-alpha-50: rgba(0, 0, 0, 0.05);
+  --c-black-alpha-100: rgba(0, 0, 0, 0.1);
+  --c-black-alpha-200: rgba(0, 0, 0, 0.2);
+  --c-black-alpha-300: rgba(0, 0, 0, 0.3);
+  --c-black-alpha-400: rgba(0, 0, 0, 0.4);
+  --c-black-alpha-500: rgba(0, 0, 0, 0.5);
+  --c-black-alpha-600: rgba(0, 0, 0, 0.6);
+  --c-black-alpha-700: rgba(0, 0, 0, 0.7);
+  --c-black-alpha-800: rgba(0, 0, 0, 0.8);
+  --c-black-alpha-900: rgba(0, 0, 0, 0.9);
+
+  /* DIMENSIONS */
+  --box-border-radius: 8px;
+  --box-padding: 20px;
+  --box-short-padding: 8px 20px;
+  --field-border-radius: 4px;
+  --field-padding-sm: 8px 12px;
+  --field-padding: 12px 16px;
+  --field-padding-lg: 16px 20px;
+  --field-padding-even: 12px;
+  --page-padding: 40px;
+  --side-panel-width: 400px;
+
+  /* TYPOGRAPHY */
+  --font-size-xs: 11px;
+  --font-size-sm: 13px;
+  --font-size-md: 15px;
+  --font-size-lg: 18px;
+  --font-size-xl: 21px;
+  --font-size-xxl: 24px;
+  --font-size-xxxl: 28px;
+  --line-height-sm: 1.1;
+  --line-height-md: 1.3;
+  --line-height-lg: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Libre Franklin', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: var(--font-size-md);
+}
+
+*::selection {
+  background: var(--c-primary-500);
+  color: var(--c-white);
+}
+
+html,
+body,
+p,
+li,
+a {
+  line-height: var(--line-height-lg);
+}
+
+html,
+body {
+  background: var(--c-neutral-50);
+  color: var(--c-neutral-700);
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p {
+  margin: var(--box-padding) 0;
+}
+
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child,
+a:first-child,
+p:first-child {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-break: var(--line-height-sm);
+}
+
+a {
+  color: var(--c-primary-500);
+}

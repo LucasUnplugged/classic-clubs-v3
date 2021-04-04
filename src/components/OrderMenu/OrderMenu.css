@@ -1,0 +1,90 @@
+:root {
+  --menu-card-size: 240px;
+}
+
+article.OrderMenu {
+  padding: 0 var(--page-padding) var(--page-padding);
+}
+
+article.OrderMenu > ul {
+  display: grid;
+  grid-gap: var(--box-padding);
+  grid-template-columns: repeat(auto-fit, minmax(var(--menu-card-size), 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(var(--menu-card-size), auto));
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+article.OrderMenu > ul > li {
+  display: grid;
+  grid-template: 1fr / 1fr;
+  min-height: var(--menu-card-size);
+}
+
+article.OrderMenu > ul > li > .Card > header {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 64px;
+}
+
+article.OrderMenu > ul > li > .Card > header > h3 {
+  align-items: center;
+  background: var(--c-neutral-100);
+  display: flex;
+  font-size: var(--font-size-lg);
+  justify-content: center;
+  line-height: var(--line-height-sm);
+  margin: 0;
+  padding: var(--box-padding) 12px;
+}
+
+article.OrderMenu > ul > li > .Card > header > section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: var(--field-padding-even);
+}
+
+article.OrderMenu > ul > li > .Card > header > section > span.price {
+  align-items: center;
+  display: flex;
+  font-size: var(--font-size-lg);
+  justify-content: center;
+}
+
+article.OrderMenu > ul > li > .Card > section {
+  color: var(--c-neutral-600);
+  padding: var(--field-padding-even);
+}
+
+article.OrderMenu > ul > li > .Card > section > h4 {
+  border-top: 1px solid var(--c-neutral-100);
+  font-weight: 100;
+  margin: 0;
+  padding: 12px;
+  text-align: center;
+}
+
+article.OrderMenu > ul > li > .Card > section > ul.ingredients {
+  display: grid;
+  grid-gap: 4px 12px;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  list-style: none;
+  margin: 0 var(--field-padding-even);
+  padding: 0;
+}
+
+article.OrderMenu > ul > li > .Card > section > ul.ingredients > li {
+  margin-left: 10%;
+}
+
+article.OrderMenu > ul > li > .Card > section > ul.ingredients > li > strong {
+  margin-left: 8px;
+}
+
+aside.OrderMenu--details {
+  background: var(--c-neutral-100);
+  padding: var(--page-header-height) var(--page-padding) var(--page-padding);
+  position: sticky;
+}

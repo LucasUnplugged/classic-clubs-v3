@@ -1,0 +1,61 @@
+aside.OrderDashboard {
+  background: var(--c-neutral-100);
+  padding: var(--page-header-height) 0 var(--page-padding) var(--page-padding);
+}
+
+aside.OrderDashboard > ul,
+aside.OrderDashboard > ul > li > .Card > h3 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+aside.OrderDashboard > ul,
+aside.OrderDashboard > ul > li {
+  width: 100%;
+}
+
+aside.OrderDashboard > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+aside.OrderDashboard > ul > li {
+  margin: 0 0 var(--box-padding);
+}
+
+aside.OrderDashboard > ul > li > .Card {
+  background: var(--c-white-alpha-700);
+  border-right: var(--box-padding) solid var(--c-neutral-700);
+  border-radius: var(--box-border-radius) 0 0 var(--box-border-radius);
+  padding: var(--box-padding);
+}
+
+aside.OrderDashboard > ul > li > .Card > h3 {
+  color: var(--c-neutral-700);
+  font-size: var(--font-size-lg);
+  margin: 0 0 8px;
+}
+
+aside.OrderDashboard > ul > li.lagging > .Card {
+  border-color: #f70;
+}
+
+aside.OrderDashboard > ul > li.lagging > .Card > h3 {
+  color: #dd6600;
+}
+
+aside.OrderDashboard > ul > li.critical > .Card {
+  border-color: #900;
+}
+
+aside.OrderDashboard > ul > li.critical > .Card > h3 {
+  color: #900;
+}
+
+aside.OrderDashboard > ul > li > .Card > h3 > span {
+  font-size: 48px;
+  line-height: var(--line-height-md);
+}
