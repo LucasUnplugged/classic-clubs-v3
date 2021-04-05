@@ -15,14 +15,14 @@ article.OrderMenu > ul {
 
 article.OrderMenu > ul > li.Card {
   display: grid;
-  grid-template: 1fr / 1fr;
+  grid-template: 158px auto / 1fr;
   min-height: var(--menu-card-size);
 }
 
 article.OrderMenu > ul > li.Card > header {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 70px;
+  grid-template-rows: 88px 70px;
 }
 
 article.OrderMenu > ul > li.Card > header > h3 {
