@@ -74,6 +74,9 @@
   --line-height-sm: 1.1;
   --line-height-md: 1.3;
   --line-height-lg: 1.6;
+
+  /* MISC */
+  --order-separator-border: 1px solid var(--c-neutral-200);
 }
 
 * {

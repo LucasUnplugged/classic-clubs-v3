@@ -1,0 +1,86 @@
+aside.OrderDetails {
+  background: var(--c-neutral-100);
+  padding: 0 var(--page-padding);
+}
+
+aside.OrderDetails > header {
+  height: var(--page-header-height);
+  padding: var(--page-padding) 0 0;
+}
+
+aside.OrderDetails > header > h2,
+aside.OrderDetails > header > h2 > span {
+  font-size: var(--font-size-xxxl);
+}
+
+aside.OrderDetails > header > h2 {
+  font-weight: 400;
+  line-height: var(--line-height-sm);
+  margin: 0;
+}
+
+aside.OrderDetails > header > h2 > span {
+  font-weight: 200;
+}
+
+aside.OrderDetails > ul {
+  list-style: none;
+  margin: 0 0 var(--field-padding-even);
+  padding: 0;
+}
+
+aside.OrderDetails > ul > li {
+  align-items: center;
+  border-top: var(--order-separator-border);
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
+}
+
+aside.OrderDetails > ul > li.empty {
+  align-items: center;
+  border-top: none;
+  flex-direction: column;
+  height: auto;
+  justify-content: center;
+  margin-top: var(--page-padding);
+  padding: var(--page-padding) 0;
+}
+
+aside.OrderDetails > ul > li.empty > h4 {
+  margin-bottom: 8px;
+}
+
+aside.OrderDetails > ul > li.total {
+  justify-content: flex-end;
+}
+
+aside.OrderDetails > ul > li > p {
+  margin: 0;
+}
+
+aside.OrderDetails > ul > li > p > .type {
+  margin-left: 8px;
+}
+
+aside.OrderDetails > ul > li > section {
+  align-items: center;
+  display: flex;
+  font-weight: 200;
+  justify-content: center;
+}
+
+aside.OrderDetails > ul > li > section > .Button {
+  font-weight: 900;
+  margin-left: 12px;
+}
+
+aside.OrderDetails > footer {
+  display: grid;
+  grid-gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+aside.OrderDetails > footer .Button + .Button {
+  margin: 0;
+}
