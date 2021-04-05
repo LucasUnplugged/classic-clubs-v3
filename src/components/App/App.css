@@ -33,18 +33,12 @@ main.App > header > h1 {
   background: var(--c-primary-500);
   border-radius: 16px 0 16px 0;
   color: var(--c-white);
-  cursor: pointer;
   font-size: var(--font-size-xxl);
   font-weight: 300;
   height: 100%;
   margin: 0;
   padding: 0 16px;
   position: relative;
-}
-
-main.App > header > h1:focus,
-main.App > header > h1:hover {
-  background: var(--c-primary-600);
 }
 
 main.App > header nav {

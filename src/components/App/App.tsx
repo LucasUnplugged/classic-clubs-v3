@@ -193,7 +193,7 @@ export default function App() {
     >
       <main className="App" role="main">
         <header role="banner">
-          <h1 onClick={viewOpenOrders} role="button" tabIndex={0}>
+          <h1 role="img" aria-label="Company logo: white text inside a red container">
             Classic Clubs
           </h1>
           <nav role="navigation">

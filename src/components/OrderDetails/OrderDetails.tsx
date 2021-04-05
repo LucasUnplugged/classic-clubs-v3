@@ -50,8 +50,8 @@ export default function OrderDetails(props: OrderDetailsProps) {
         {sandwichList}
         {order.itemCount === 0 && (
           <li className="empty">
-            <h4>Order Empty</h4>
-            <p>Please add sandwiches from the menu</p>
+            <h4>Order is Empty</h4>
+            <p>Please add sandwiches from the menu.</p>
           </li>
         )}
         {order.itemCount > 0 && (
