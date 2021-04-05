@@ -3,7 +3,7 @@ import Card, { CardPadding } from '../../ui-lib/Card/Card';
 import './Orders.css';
 import OrderDashboard from '../OrderDashboard/OrderDashboard';
 import OrderList from '../OrderList/OrderList';
-import { Order, OrderState } from '../../shared/models/data.models';
+import { Order, OrderStatus } from '../../shared/models/data.models';
 import { Route, ROUTE_TITLES } from '../../shared/models/route.models';
 import { orderReducer, OrderReducer } from './Orders.reducer';
 import OrderMenu from '../OrderMenu/OrderMenu';
@@ -38,8 +38,8 @@ export default function Orders(props: OrderProps) {
     const filtered: Order[] = [];
     const open: Order[] = [];
     orders.forEach((order: Order): void => {
-      const isOrderPickedup = order.state === OrderState.pickedUp;
-      const isOrderOpen = order.state === OrderState.open;
+      const isOrderPickedup = order.status === OrderStatus.pickedUp;
+      const isOrderOpen = order.status === OrderStatus.open;
       const isPickedupRoute = route === Route.pickedupOrders;
       const orderMatchesRoute = isPickedupRoute ? isOrderPickedup : isOrderOpen;
       if (orderMatchesRoute) {

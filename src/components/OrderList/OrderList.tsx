@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Order, OrderState, SandwichNames } from '../../shared/models/data.models';
+import { Order, OrderStatus, SandwichNames } from '../../shared/models/data.models';
 import Button from '../../ui-lib/Button/Button';
 import { OrderDispatch } from '../Orders/Orders.reducer';
 import './OrderList.css';
@@ -19,8 +19,8 @@ export default function OrderList(props: OrderListProps) {
   const updateOrder = React.useCallback(
     (order: Order): void => {
       console.log(`Marking order #${order.id} as picked-up`, order);
-      // Update order state
-      ordersDispatch({ type: 'UPDATE_ORDER', order: { ...order, state: OrderState.pickedUp } });
+      // Update order status
+      ordersDispatch({ type: 'UPDATE_ORDER', order: { ...order, status: OrderStatus.pickedUp } });
     },
     [ordersDispatch]
   );
@@ -63,7 +63,7 @@ export default function OrderList(props: OrderListProps) {
               <strong className="cost" role="cell">
                 ${order.cost.toFixed(2)}
               </strong>
-              {order.state === OrderState.open ? (
+              {order.status === OrderStatus.open ? (
                 <Button
                   role="cell"
                   aria-label={'Mark order as "picked-up"'}
@@ -72,7 +72,7 @@ export default function OrderList(props: OrderListProps) {
                   Picked-Up
                 </Button>
               ) : (
-                <em className="state" role="cell">
+                <em className="status" role="cell">
                   Picked-Up
                 </em>
               )}

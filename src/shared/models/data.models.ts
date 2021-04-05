@@ -35,7 +35,7 @@ export interface Sandwich {
   price: number;
 }
 
-export enum OrderState {
+export enum OrderStatus {
   open = 'open',
   pickedUp = 'pickedUp',
 }
@@ -49,7 +49,7 @@ export interface Order {
   id: number;
   itemCount: number;
   items: OrderItems;
-  state: OrderState;
+  status: OrderStatus;
   timestamp: number;
 }
 

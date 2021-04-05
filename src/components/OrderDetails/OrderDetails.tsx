@@ -7,7 +7,7 @@ interface OrderDetailsProps {
   children: React.ReactNode;
   menu: Sandwiches;
   order: Order;
-  removeSandwich: (type: keyof typeof SandwichNames, amount: number) => void;
+  removeSandwich: (type: keyof typeof SandwichNames) => void;
 }
 
 export default function OrderDetails(props: OrderDetailsProps) {
@@ -28,7 +28,7 @@ export default function OrderDetails(props: OrderDetailsProps) {
                 <Button
                   aria-label={amount > 1 ? `Remove 1 ${type} sandwich` : `Remove ${type} sandwich`}
                   isIcon
-                  onClick={() => removeSandwich(type, amount)}
+                  onClick={() => removeSandwich(type)}
                 >
                   {amount > 1 ? '–' : 'X'}
                 </Button>

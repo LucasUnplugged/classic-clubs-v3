@@ -52,7 +52,7 @@ ul.OrderList > li > strong.cost {
   padding-right: 20px;
 }
 
-ul.OrderList > li > em.state {
+ul.OrderList > li > em.status {
   font-weight: 700;
   justify-self: end;
 }

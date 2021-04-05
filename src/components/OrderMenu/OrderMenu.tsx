@@ -5,7 +5,7 @@ import { OrderDispatch } from '../Orders/Orders.reducer';
 import {
   Order,
   OrderItems,
-  OrderState,
+  OrderStatus,
   Sandwich,
   SandwichNames,
 } from '../../shared/models/data.models';
@@ -41,7 +41,7 @@ export default function OrderMenu(props: OrderMenuProps) {
       id: orderNumber,
       itemCount: 0,
       items: emptyItems,
-      state: OrderState.open,
+      status: OrderStatus.open,
       timestamp: new Date().getTime(),
     }),
     [orderNumber]
@@ -62,10 +62,10 @@ export default function OrderMenu(props: OrderMenuProps) {
   }, [emptyOrder, inventoryDispatch, menu, order]);
 
   const removeSandwich = React.useCallback(
-    (type: keyof typeof SandwichNames, amount: number): void => {
+    (type: keyof typeof SandwichNames): void => {
       const sandwich = menu[type];
       // Remove from order
-      setOrder((state: Order): Order => removeFromOrder(state, sandwich));
+      setOrder((odr: Order): Order => removeFromOrder(odr, sandwich));
       // Return our sandwich's ingredients to the inventory
       inventoryDispatch({ type: 'ADD_SANDWICH', sandwich });
     },
@@ -102,7 +102,7 @@ export default function OrderMenu(props: OrderMenuProps) {
     // Handler for the "Add to Order" button
     const addSandwich = (sandwich: Sandwich): void => {
       // Add to order
-      setOrder((state: Order): Order => addToOrder(state, sandwich));
+      setOrder((odr: Order): Order => addToOrder(odr, sandwich));
       // Remove all sandwich ingredients from inventory
       inventoryDispatch({ type: 'REMOVE_SANDWICH', sandwich });
     };
