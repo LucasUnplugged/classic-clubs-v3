@@ -5,67 +5,54 @@ import './OrderDashboard.css';
 
 const LAGGING_DELAY = 300000;
 const CRITICAL_DELAY = 600000;
-const HEARTBEAT_DELAY = 5000;
-let heartbeat: number;
 
 interface OrdersDashboardProps {
+  now: number;
   openOrders: Order[];
 }
 
 export default function OrderDashboard(props: OrdersDashboardProps) {
-  const { openOrders } = props;
-  const [now, setNow] = React.useState<number>(new Date().getTime());
+  const { now, openOrders } = props;
+  const [lagging, setLagging] = React.useState<number>(0);
+  const [critical, setCritical] = React.useState<number>(0);
 
   // Calculate states on every new heartbeat
-  const [laggingOrderCount, criticalOrderCount] = React.useMemo((): number[] => {
-    let lagging = 0;
-    let critical = 0;
+  React.useEffect((): void => {
+    let laggingCount = 0;
+    let criticalCount = 0;
     openOrders.forEach((order: Order): void => {
-      if (now - order.timestamp > LAGGING_DELAY) {
-        lagging++;
-      } else if (now - order.timestamp > CRITICAL_DELAY) {
-        critical++;
+      const delta = now - order.timestamp;
+      if (delta > CRITICAL_DELAY) {
+        criticalCount++;
+      } else if (delta > LAGGING_DELAY) {
+        laggingCount++;
       }
     });
-    return [lagging, critical];
+    setLagging(laggingCount);
+    setCritical(criticalCount);
   }, [now, openOrders]);
-
-  // Live update heartbeat
-  React.useEffect((): (() => void) => {
-    clearInterval(heartbeat);
-    heartbeat = setInterval((): void => setNow(new Date().getTime()), HEARTBEAT_DELAY);
-    return (): void => {
-      clearInterval(heartbeat);
-    };
-  }, [openOrders]);
 
   return (
     <aside className="OrderDashboard">
       <ul>
-        <li>
-          <Card>
-            <h3>
-              <span className="number">{openOrders.length}</span>
-              Open orders
-            </h3>
-          </Card>
-        </li>
-        <li className={laggingOrderCount ? 'lagging' : ''}>
-          <Card>
-            <h3>
-              <span className="number">{laggingOrderCount}</span>
-              Lagging orders
-            </h3>
-          </Card>
-        </li>
-        <li className={criticalOrderCount ? 'critical' : ''}>
-          <Card>
-            <h3>
-              <span className="number">{criticalOrderCount}</span>
-              Critical orders
-            </h3>
-          </Card>
-        </li>
+        <Card tag="li">
+          <h3>
+            <span className="number">{openOrders.length}</span>
+            Open orders
+          </h3>
+        </Card>
+        <Card tag="li" className={lagging ? 'lagging' : ''}>
+          <h3>
+            <span className="number">{lagging}</span>
+            Lagging
+          </h3>
+        </Card>
+        <Card tag="li" className={critical ? 'critical' : ''}>
+          <h3>
+            <span className="number">{critical}</span>
+            Critical
+          </h3>
+        </Card>
       </ul>
     </aside>
   );

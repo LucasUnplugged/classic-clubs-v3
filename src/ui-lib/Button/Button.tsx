@@ -9,12 +9,26 @@ interface ButtonProps {
   children: string;
   isActive?: boolean;
   isDisabled?: boolean;
+  isIcon?: boolean;
   isLink?: boolean;
   isPrimary?: boolean;
+  role?: string;
+  title?: string;
 }
 
 export default function Button(props: ButtonProps) {
-  const { onClick, children, isActive, isDisabled, isLink, isPrimary, ...optionalProps } = props;
+  const {
+    onClick,
+    children,
+    isActive,
+    isDisabled,
+    isIcon,
+    isLink,
+    isPrimary,
+    title,
+    ...optionalProps
+  } = props;
+  const titleText = title ?? props['aria-label'];
 
   const clickHandler = React.useCallback(
     (event: ClickEvent): void => {
@@ -30,7 +44,9 @@ export default function Button(props: ButtonProps) {
   );
 
   let className = 'Button';
-  if (isLink) {
+  if (isIcon) {
+    className += ' icon';
+  } else if (isLink) {
     className += isActive ? ' active link' : ' link';
   } else if (isPrimary) {
     className += ' primary';
@@ -38,11 +54,12 @@ export default function Button(props: ButtonProps) {
 
   return (
     <button
-      type="button"
       {...optionalProps}
       className={className}
       disabled={isDisabled}
       onClick={clickHandler}
+      title={titleText}
+      type="button"
     >
       {children}
     </button>

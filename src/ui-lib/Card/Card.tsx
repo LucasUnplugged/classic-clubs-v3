@@ -10,10 +10,23 @@ export enum CardPadding {
 
 interface CardProps {
   children: React.ReactNode;
+  className?: string;
+  role?: string;
   padding?: CardPadding;
+  tag?: 'article' | 'div' | 'li';
 }
 
 export default function Card(props: CardProps) {
-  const { children, padding = CardPadding.md } = props;
-  return <article className={`Card ${padding}`}>{children}</article>;
+  const {
+    children,
+    className = '',
+    padding = CardPadding.md,
+    tag: Tag = 'article',
+    ...optionalProps
+  } = props;
+  return (
+    <Tag {...optionalProps} className={`Card ${padding} ${className}`}>
+      {children}
+    </Tag>
+  );
 }

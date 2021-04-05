@@ -8,6 +8,9 @@ import { Route, ROUTE_TITLES } from '../../shared/models/route.models';
 import { orderReducer, OrderReducer } from './Orders.reducer';
 import OrderMenu from '../OrderMenu/OrderMenu';
 
+const HEARTBEAT_DELAY = 4000;
+let heartbeat: number;
+
 export interface OrderProps {
   route: Route;
 }
@@ -15,8 +18,20 @@ export interface OrderProps {
 export default function Orders(props: OrderProps) {
   const { route } = props;
   const [orders, ordersDispatch] = React.useReducer<OrderReducer>(orderReducer, []);
-  const [selectedOrder, setSelectedOrder] = React.useState<Order>();
+  const [now, setNow] = React.useState<number>(new Date().getTime());
   let title = ROUTE_TITLES[route];
+
+  // Live update heartbeat
+  React.useEffect((): (() => void) => {
+    // Only maintain heartbeat if the user isn't on the "New Order" screen
+    if (route !== Route.newOrder) {
+      setNow(new Date().getTime());
+      heartbeat = setInterval((): void => {
+        setNow(new Date().getTime());
+      }, HEARTBEAT_DELAY);
+    }
+    return (): void => clearInterval(heartbeat);
+  }, [route]);
 
   // Get a list of filtered orders (by route), and open orders
   const [filteredOrders, openOrders] = React.useMemo((): Order[][] => {
@@ -44,9 +59,9 @@ export default function Orders(props: OrderProps) {
       </header>
       {route !== Route.newOrder && (
         <>
-          <OrderDashboard openOrders={openOrders} />
+          <OrderDashboard now={now} openOrders={openOrders} />
           <Card padding={CardPadding.sm}>
-            <OrderList orders={filteredOrders} />
+            <OrderList now={now} ordersDispatch={ordersDispatch} orders={filteredOrders} />
           </Card>
         </>
       )}

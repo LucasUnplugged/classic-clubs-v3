@@ -47,6 +47,7 @@ export type OrderItems = {
 export interface Order {
   cost: number;
   id: number;
+  itemCount: number;
   items: OrderItems;
   state: OrderState;
   timestamp: number;

@@ -1,3 +1,7 @@
+:root {
+  --button-icon-size: 30px;
+}
+
 button.Button {
   background: var(--c-white-alpha-400);
   border: 2px solid var(--c-primary-500);
@@ -19,19 +23,35 @@ button.Button + button.Button {
 
 button.Button.link {
   background: none;
-  border: none;
+  border-color: transparent;
   box-shadow: none;
 }
 
+button.Button.icon.active,
 button.Button.link.active {
   background: var(--c-neutral-50);
+  border-color: var(--c-neutral-50);
   color: var(--c-primary-600);
 }
 
+button.Button.icon:focus,
+button.Button.icon:hover,
 button.Button.link:focus,
 button.Button.link:hover {
   background: var(--c-primary-500);
+  border-color: var(--c-primary-500);
   color: var(--c-white);
+}
+
+button.Button.icon {
+  align-items: center;
+  display: flex;
+  border-radius: 100%;
+  height: var(--button-icon-size);
+  justify-content: center;
+  min-width: var(--button-icon-size);
+  padding: 0;
+  width: var(--button-icon-size);
 }
 
 button.Button.primary {

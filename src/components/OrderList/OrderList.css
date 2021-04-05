@@ -5,9 +5,51 @@ ul.OrderList {
 }
 
 ul.OrderList > li {
-  margin: 4px 0 0;
+  align-items: center;
+  border-top: var(--order-separator-border);
+  display: grid;
+  grid-column-gap: 12px;
+  grid-template-columns: 140px auto 80px 120px;
+  margin: var(--box-padding) 0 0;
+  padding: var(--box-padding) 0 0;
 }
 
 ul.OrderList > li:first-child {
+  border-top: none;
   margin-top: 0;
+  padding-top: 0;
+}
+
+ul.OrderList > li > header > h4,
+ul.OrderList > li > header > h5 {
+  line-height: var(--line-height-sm);
+}
+
+ul.OrderList > li > header > h4 {
+  margin-bottom: 4px;
+}
+
+ul.OrderList > li > header > h5 {
+  font-weight: 200;
+  margin: 0;
+}
+
+ul.OrderList > li > ul.items {
+  align-items: center;
+  display: grid;
+  grid-row-gap: 4px;
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(24px, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.OrderList > li > strong.cost {
+  justify-self: center;
+}
+
+ul.OrderList > li > em.state {
+  font-weight: 700;
+  justify-self: end;
 }

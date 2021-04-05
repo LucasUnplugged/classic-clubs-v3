@@ -4,7 +4,7 @@ aside.OrderDashboard {
 }
 
 aside.OrderDashboard > ul,
-aside.OrderDashboard > ul > li > .Card > h3 {
+aside.OrderDashboard > ul > li.Card > h3 {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -22,40 +22,37 @@ aside.OrderDashboard > ul {
   padding: 0;
 }
 
-aside.OrderDashboard > ul > li {
-  margin: 0 0 var(--box-padding);
-}
-
-aside.OrderDashboard > ul > li > .Card {
+aside.OrderDashboard > ul > li.Card {
   background: var(--c-white-alpha-700);
   border-right: var(--box-padding) solid var(--c-neutral-700);
   border-radius: var(--box-border-radius) 0 0 var(--box-border-radius);
+  margin: 0 0 var(--box-padding);
   padding: var(--box-padding);
 }
 
-aside.OrderDashboard > ul > li > .Card > h3 {
+aside.OrderDashboard > ul > li.Card > h3 {
   color: var(--c-neutral-700);
   font-size: var(--font-size-lg);
   margin: 0 0 8px;
 }
 
-aside.OrderDashboard > ul > li.lagging > .Card {
+aside.OrderDashboard > ul > li.Card.lagging {
   border-color: #f70;
 }
 
-aside.OrderDashboard > ul > li.lagging > .Card > h3 {
+aside.OrderDashboard > ul > li.Card.lagging > h3 {
   color: #dd6600;
 }
 
-aside.OrderDashboard > ul > li.critical > .Card {
+aside.OrderDashboard > ul > li.Card.critical {
   border-color: #900;
 }
 
-aside.OrderDashboard > ul > li.critical > .Card > h3 {
+aside.OrderDashboard > ul > li.Card.critical > h3 {
   color: #900;
 }
 
-aside.OrderDashboard > ul > li > .Card > h3 > span {
+aside.OrderDashboard > ul > li.Card > h3 > span {
   font-size: 48px;
   line-height: var(--line-height-md);
 }
