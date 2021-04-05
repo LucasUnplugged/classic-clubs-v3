@@ -14,6 +14,7 @@ import {
 import { Route, ROUTE_TITLES } from '../../shared/models/route.models';
 import { inventoryReducer, InventoryReducer, InventoryAction } from './App.reducer';
 
+// MODULE HELPERS /////////////////////////////////////////////////////////////////////////////////
 // Getter for our specific route handlers, to avoid boilerplate repetition
 const getRouteHandler = (key: keyof typeof Route, setter: (route: Route) => void): (() => void) => {
   return (): void => {
@@ -27,29 +28,10 @@ const emptyInventory = {} as Inventory;
 Object.keys(Ingredient).forEach((key: string): void => {
   emptyInventory[key] = 0;
 });
-
-// Function to add/remove a sandwich to/from an order
-const updateOrderSandwiches = (
-  order: Order,
-  sandwich: Sandwich,
-  modifier: number,
-  calculator: Calculator
-): Order => {
-  const newOrder: Order = {
-    ...order,
-    itemCount: order.itemCount + modifier,
-    items: {
-      ...order.items,
-      [sandwich.name]: order.items[sandwich.name] + modifier,
-    },
-  };
-  newOrder.cost = calculator(newOrder);
-  return newOrder;
-};
+// END OF MODULE HELPERS //////////////////////////////////////////////////////////////////////////
 
 // SHOP CONTEXT ///////////////////////////////////////////////////////////////////////////////////
 type OrderModifier = (order: Order, sandwich: Sandwich) => Order;
-type Calculator = (order: Order) => number;
 interface ShopContextType {
   addToOrder: OrderModifier;
   incrementOrderNumber: () => void;
@@ -63,6 +45,7 @@ interface ShopContextType {
 export const ShopContext = React.createContext<ShopContextType>({} as ShopContextType);
 // END OF SHOP CONTEXT ////////////////////////////////////////////////////////////////////////////
 
+// MAIN APP FC ////////////////////////////////////////////////////////////////////////////////////
 export default function App() {
   // Setup app state
   const [route, setRoute] = React.useState<Route>();
@@ -72,16 +55,27 @@ export default function App() {
   );
   const [menu, setMenu] = React.useState<Sandwiches>({} as Sandwiches);
   const [orderNumber, setOrderNumber] = React.useState<number>(1);
-  const incrementOrderNumber = React.useCallback(
-    (): void => setOrderNumber((count: number): number => count + 1),
-    []
-  );
 
+  // ROUTE MANAGEMENT /////////////////////////////////////////////////////////////////////////////
   // Setup route handlers
   const viewOpenOrders = getRouteHandler('openOrders' as keyof typeof Route, setRoute);
   const viewPickedupOrders = getRouteHandler('pickedupOrders' as keyof typeof Route, setRoute);
   const viewNewOrder = getRouteHandler('newOrder' as keyof typeof Route, setRoute);
 
+  // Set initial route
+  React.useEffect((): void => {
+    // Determine our initial route...
+    const path = window.location.pathname;
+    const initialRouteKey =
+      Object.keys(Route).find((key: string): boolean => Route[key] === path) || 'openOrders';
+    const initialRoute = Route[initialRouteKey];
+    // ...and save it into state
+    setRoute(initialRoute);
+    window.history.pushState(null, initialRouteKey, initialRoute);
+  }, []);
+  // END OF ROUTE MANAGEMENT //////////////////////////////////////////////////////////////////////
+
+  // EVENT HANDLERS ///////////////////////////////////////////////////////////////////////////////
   // KeyDown handler
   const keyDownHandler = React.useCallback(
     (event: KeyboardEvent): void => {
@@ -107,7 +101,22 @@ export default function App() {
     [viewNewOrder, viewOpenOrders, viewPickedupOrders]
   );
 
+  // Add event listeners
+  React.useEffect(() => {
+    window.addEventListener('keydown', keyDownHandler);
+    // Remove event listeners on cleanup
+    return () => {
+      window.removeEventListener('keydown', keyDownHandler);
+    };
+  }, [keyDownHandler]);
+  // END OF EVENT HANDLERS ////////////////////////////////////////////////////////////////////////
+
   // ORDER MODIFIER FUNCTIONS /////////////////////////////////////////////////////////////////////
+  const incrementOrderNumber = React.useCallback(
+    (): void => setOrderNumber((count: number): number => count + 1),
+    []
+  );
+
   const getOrderCost = React.useCallback(
     (order: Order): number => {
       let cost = 0;
@@ -121,19 +130,35 @@ export default function App() {
     [menu]
   );
 
-  const addToOrder: OrderModifier = React.useCallback(
-    (order: Order, sandwich: Sandwich): Order =>
-      updateOrderSandwiches(order, sandwich, 1, getOrderCost),
+  // Add/remove a sandwich to/from an order
+  const updateOrderSandwiches = React.useCallback(
+    (order: Order, sandwich: Sandwich, modifier: number): Order => {
+      const newOrder: Order = {
+        ...order,
+        itemCount: order.itemCount + modifier,
+        items: {
+          ...order.items,
+          [sandwich.name]: order.items[sandwich.name] + modifier,
+        },
+      };
+      newOrder.cost = getOrderCost(newOrder);
+      return newOrder;
+    },
     [getOrderCost]
+  );
+
+  const addToOrder: OrderModifier = React.useCallback(
+    (order: Order, sandwich: Sandwich): Order => updateOrderSandwiches(order, sandwich, 1),
+    [updateOrderSandwiches]
   );
 
   const removeFromOrder: OrderModifier = React.useCallback(
-    (order: Order, sandwich: Sandwich): Order =>
-      updateOrderSandwiches(order, sandwich, -1, getOrderCost),
-    [getOrderCost]
+    (order: Order, sandwich: Sandwich): Order => updateOrderSandwiches(order, sandwich, -1),
+    [updateOrderSandwiches]
   );
   // END OF ORDER MODIFIER FUNCTIONS //////////////////////////////////////////////////////////////
 
+  // DATA FETCHING ////////////////////////////////////////////////////////////////////////////////
   // Fetch the inventory and menu data
   React.useEffect((): void => {
     fetch('data.json', {
@@ -149,34 +174,7 @@ export default function App() {
         setMenu(sandwiches);
       });
   }, []);
-
-  // Set initial route
-  React.useEffect((): void => {
-    // Determine our initial route...
-    const path = window.location.pathname;
-    const initialRouteKey =
-      Object.keys(Route).find((key: string): boolean => Route[key] === path) || 'openOrders';
-    const initialRoute = Route[initialRouteKey];
-    // ...and save it into state
-    setRoute(initialRoute);
-    window.history.pushState(null, initialRouteKey, initialRoute);
-  }, []);
-
-  // Add event listeners
-  React.useEffect(() => {
-    window.addEventListener('keydown', keyDownHandler);
-    // Remove event listeners on cleanup
-    return () => {
-      window.removeEventListener('keydown', keyDownHandler);
-    };
-  }, []);
-
-  console.warn(
-    `************************
-    TODO:
-      - Tests
-    ************************`
-  );
+  // END OF DATA FETCHING /////////////////////////////////////////////////////////////////////////
 
   return (
     <ShopContext.Provider
