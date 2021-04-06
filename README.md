@@ -1,2 +1,2 @@
-# classic-clubs-v2
+# classic-clubs
 Created with CodeSandbox
