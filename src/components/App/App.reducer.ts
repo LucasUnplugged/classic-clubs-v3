@@ -4,7 +4,6 @@ import {
   Order,
   Sandwich,
   Sandwiches,
-  SandwichNames,
 } from '../../shared/models/data.models';
 
 type InventoryActionType =
@@ -66,8 +65,8 @@ export const inventoryReducer: InventoryReducer = (
       if (!action.sandwich) {
         return state;
       }
-      Object.entries(action.sandwich.ingredients).forEach(([ingredient, amount]): void => {
-        newState[ingredient] = newState[ingredient] + amount;
+      Object.entries(action.sandwich.ingredients).forEach(([ingredient, count]): void => {
+        newState[ingredient] = newState[ingredient] + count;
       });
       return newState;
 
@@ -77,18 +76,18 @@ export const inventoryReducer: InventoryReducer = (
       }
       // For each sandwich type in the order, we want to return
       // those ingredients into the inventory.
-      Object.entries(action.order.items).forEach(
-        ([type, multiplier]: [keyof typeof SandwichNames, number]): void => {
-          // Only return ingredients for sandwiches that are in the order
-          if (multiplier > 0) {
-            const sandwich = action.menu[type];
-            Object.entries(sandwich.ingredients).forEach(([ingredient, quantity]): void => {
+      Object.entries(action.order.items).forEach(([type, multiplier]: [string, number]): void => {
+        // Only return ingredients for sandwiches that are in the order
+        if (multiplier > 0) {
+          const sandwich: Sandwich = action.menu[type];
+          Object.entries(sandwich.ingredients).forEach(
+            ([ingredient, quantity]: [string, number]): void => {
               // Make sure we're accounting for each sandwhich of this type (i.e., the multiplier)
               newState[ingredient] = newState[ingredient] + quantity * multiplier;
-            });
-          }
+            }
+          );
         }
-      );
+      });
       return newState;
 
     case 'REDUCE_INGREDIENT':
@@ -105,8 +104,8 @@ export const inventoryReducer: InventoryReducer = (
       if (!action.sandwich) {
         return state;
       }
-      Object.entries(action.sandwich.ingredients).forEach(([ingredient, amount]): void => {
-        newState[ingredient] = newState[ingredient] - amount;
+      Object.entries(action.sandwich.ingredients).forEach(([ingredient, count]): void => {
+        newState[ingredient] = newState[ingredient] - count;
       });
       return newState;
 

@@ -14,7 +14,7 @@ import Button from '../../ui-lib/Button/Button';
 import OrderDetails from '../OrderDetails/OrderDetails';
 
 const emptyItems = {} as OrderItems;
-Object.keys(SandwichNames).forEach((name: keyof typeof SandwichNames): void => {
+Object.keys(SandwichNames).forEach((name: string): void => {
   emptyItems[name as string] = 0;
 });
 
@@ -122,7 +122,7 @@ export default function OrderMenu(props: OrderMenuProps) {
 
     // Return the list of sandwiches
     return Object.entries(menu).map(
-      ([name, sandwich]: [keyof typeof SandwichNames, Sandwich]): React.ReactNode => {
+      ([name, sandwich]: [string, Sandwich]): React.ReactNode => {
         const isSoldOut = !hasIngredients(sandwich);
         return (
           <Card

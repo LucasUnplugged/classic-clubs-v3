@@ -9,7 +9,7 @@ import { orderReducer, OrderReducer } from './Orders.reducer';
 import OrderMenu from '../OrderMenu/OrderMenu';
 
 const HEARTBEAT_DELAY = 4000;
-let heartbeat: number;
+let heartbeat: ReturnType<typeof setInterval>;
 
 export interface OrderProps {
   route: Route;

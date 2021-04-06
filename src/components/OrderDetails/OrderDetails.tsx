@@ -16,7 +16,7 @@ export default function OrderDetails(props: OrderDetailsProps) {
   const sandwichList = React.useMemo(
     (): React.ReactNode[] =>
       Object.entries(order.items).map(
-        ([type, amount]: [keyof typeof SandwichNames, number]): React.ReactNode => {
+        ([type, amount]: [string, number]): React.ReactNode => {
           return !amount ? null : (
             <li key={type}>
               <p>
@@ -28,7 +28,7 @@ export default function OrderDetails(props: OrderDetailsProps) {
                 <Button
                   aria-label={amount > 1 ? `Remove 1 ${type} sandwich` : `Remove ${type} sandwich`}
                   isIcon
-                  onClick={() => removeSandwich(type)}
+                  onClick={() => removeSandwich(type as keyof typeof SandwichNames)}
                 >
                   {amount > 1 ? '–' : 'X'}
                 </Button>

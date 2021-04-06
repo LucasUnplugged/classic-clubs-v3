@@ -9,7 +9,6 @@ import {
   ShopDTO,
   Ingredient,
   Order,
-  SandwichNames,
 } from '../../shared/models/data.models';
 import { Route, ROUTE_TITLES } from '../../shared/models/route.models';
 import { inventoryReducer, InventoryReducer, InventoryAction } from './App.reducer';
@@ -120,11 +119,9 @@ export default function App() {
   const getOrderCost = React.useCallback(
     (order: Order): number => {
       let cost = 0;
-      Object.entries(order.items).forEach(
-        ([type, amount]: [keyof typeof SandwichNames, number]): void => {
-          cost += menu[type].price * amount;
-        }
-      );
+      Object.entries(order.items).forEach(([type, amount]: [string, number]): void => {
+        cost += menu[type].price * amount;
+      });
       return cost;
     },
     [menu]

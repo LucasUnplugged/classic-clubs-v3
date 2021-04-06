@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Order, OrderStatus, SandwichNames } from '../../shared/models/data.models';
+import { Order, OrderStatus } from '../../shared/models/data.models';
 import Button from '../../ui-lib/Button/Button';
 import { OrderDispatch } from '../Orders/Orders.reducer';
 import './OrderList.css';
@@ -39,17 +39,15 @@ export default function OrderList(props: OrderListProps) {
           }
 
           const orderItems: React.ReactNode[] = [];
-          Object.entries(order.items).forEach(
-            ([type, amount]: [keyof typeof SandwichNames, number]): void => {
-              if (amount > 0) {
-                orderItems.push(
-                  <li key={type}>
-                    {amount} {type}
-                  </li>
-                );
-              }
+          Object.entries(order.items).forEach(([type, amount]: [string, number]): void => {
+            if (amount > 0) {
+              orderItems.push(
+                <li key={type}>
+                  {amount} {type}
+                </li>
+              );
             }
-          );
+          });
 
           return (
             <li key={order.id} role="row">
