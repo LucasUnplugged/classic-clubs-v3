@@ -52,7 +52,7 @@ article.OrderMenu > ul > li.Card > header > section > span.price {
   line-height: var(--line-height-sm);
 }
 
-article.OrderMenu > ul > li.sold-out > .Card > header > section > span.price {
+article.OrderMenu > ul > li.sold-out.Card > header > section > span.price {
   color: var(--c-neutral-500);
   font-weight: 300;
   text-decoration: line-through;

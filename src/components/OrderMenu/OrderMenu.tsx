@@ -15,7 +15,7 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 
 const emptyItems = {} as OrderItems;
 Object.keys(SandwichNames).forEach((name: string): void => {
-  emptyItems[name as string] = 0;
+  emptyItems[name] = 0;
 });
 
 interface OrderMenuProps {

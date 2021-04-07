@@ -3,8 +3,8 @@ import { Order } from '../../shared/models/data.models';
 import Card from '../../ui-lib/Card/Card';
 import './OrderDashboard.css';
 
-const LAGGING_DELAY = 300000;
-const CRITICAL_DELAY = 600000;
+const LAGGING_DELAY = 30000;
+const CRITICAL_DELAY = 60000;
 
 interface OrdersDashboardProps {
   now: number;
@@ -38,7 +38,7 @@ export default function OrderDashboard(props: OrdersDashboardProps) {
         <Card tag="li">
           <h3>
             <span className="number">{openOrders.length}</span>
-            Open orders
+            Open {openOrders.length === 1 ? 'order' : 'orders'}
           </h3>
         </Card>
         <Card tag="li" className={lagging ? 'lagging' : ''}>
