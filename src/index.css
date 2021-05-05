@@ -137,7 +137,7 @@ h3,
 h4,
 h5,
 h6 {
-  line-break: var(--line-height-sm);
+  line-height: var(--line-height-sm);
 }
 
 a {

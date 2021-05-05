@@ -2,7 +2,9 @@
   "name": "classic-clubs",
   "version": "1.0.0",
   "description": "Sandwich order tracking app",
-  "keywords": ["react", "deliverr"],
+  "keywords": [
+    "react"
+  ],
   "main": "src/index.tsx",
   "dependencies": {
     "@testing-library/jest-dom": "5.11.10",
@@ -29,6 +31,13 @@
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject"
   },
-  "setupFilesAfterEnv": ["./src/setupTests.ts"],
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "setupFilesAfterEnv": [
+    "./src/setupTests.ts"
+  ],
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
